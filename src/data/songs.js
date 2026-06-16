@@ -45,4 +45,52 @@ export const songs = [
       L(14.5,18.5,"We'll be alright, just hold on tight",  "Uil bi olráit, yost jóuld on táit"),
     ],
   },
+  {
+    id: "famous-last-words", title: "Famous Last Words", artist: "My Chemical Romance",
+    youtubeId: "8bbTtPL1jRs", imported: false,
+    lyrics: [
+      // Verse 1
+      L(7,   12,  "Now, I know that I can't make you stay, but where's your heart?",          "Náu, Ái nóu dat Ái kant méik yu stéi, bat uérs yor jart?"),
+      L(13,  18,  "And I know there's nothing I can say to change that part",                 "And Ái nóu ders názing Ái kan séi tu chéinch dat part"),
+      // Pre-chorus
+      L(29,  34,  "So many bright lights, they cast a shadow, but can I speak?",              "Sóu méni bráit láits, déi kast a shádou, bat kan Ái spik?"),
+      L(34.5,38.5,"Well, is it hard understanding I'm incomplete?",                           "Uél, is it jard anderstánding Áim ínkomplit?"),
+      L(39,  43,  "A life that's so demanding, I get so weak",                                "A láif dats sóu dimánding, Ái gét sóu uik"),
+      L(43.5,47.5,"A love that's so demanding, I can't speak",                               "A láv dats sóu dimánding, Ái kant spik"),
+      // Chorus 1
+      L(48,  52,  "I am not afraid to keep on living",                                        "Ái am not afréid tu kip on líving", true),
+      L(52.5,57,  "I am not afraid to walk this world alone",                                 "Ái am not afréid tu uók dis uórld alóun", true),
+      L(57.5,62,  "Honey, if you stay, I'll be forgiven",                                     "Jáni, if yu stéi, Áil bi forguíven", true),
+      L(62.5,67,  "Nothing you can say can stop me going home",                               "Názing yu kan séi kan stap mi góing jóum", true),
+      // Verse 2
+      L(68,  74,  "Can you see, my eyes are shining bright, 'cause I'm out here",             "Kan yu si, mái áis ar sháining bráit, kos Áim áut jir"),
+      L(74.5,80,  "On the other side of a jet black hotel mirror, and I'm so weak",           "On di áder sáid of a chét blak jotél míror, and Áim sóu uik"),
+      L(80.5,85,  "Is it hard understanding I'm incomplete?",                                 "Is it jard anderstánding Áim ínkomplit?"),
+      L(85.5,90,  "A love that's so demanding, I get weak",                                   "A láv dats sóu dimánding, Ái gét uik"),
+      // Chorus 2
+      L(91,  95,  "I am not afraid to keep on living",                                        "Ái am not afréid tu kip on líving", true),
+      L(95.5,100, "I am not afraid to walk this world alone",                                 "Ái am not afréid tu uók dis uórld alóun", true),
+      L(100.5,105,"Honey, if you stay, I'll be forgiven",                                     "Jáni, if yu stéi, Áil bi forguíven", true),
+      L(105.5,110,"Nothing you can say can stop me going home",                               "Názing yu kan séi kan stap mi góing jóum", true),
+      // Bridge
+      L(127,131,  "These bright lights have always blinded me",                               "Dis bráit láits jav ólueis bláinded mi"),
+      L(131.5,136,"These bright lights have always blinded me, I say!",                       "Dis bráit láits jav ólueis bláinded mi, Ái séi!"),
+      // Breakdown
+      L(138,142,  "I see you lying next to me",                                               "Ái si yu láing nékst tu mi"),
+      L(142.5,147,"With words I thought I'd never speak",                                     "Uid uórds Ái zot Áid néver spik"),
+      L(147.5,152,"Awake and unafraid, asleep or dead",                                       "Auéik and anafréid, aslíp or dét"),
+      L(153,157,  "'Cause I see you lying next to me",                                        "Kos Ái si yu láing nékst tu mi"),
+      L(157.5,162,"With words I thought I'd never speak",                                     "Uid uórds Ái zot Áid néver spik"),
+      L(162.5,167,"Awake and unafraid, asleep or dead",                                       "Auéik and anafréid, aslíp or dét"),
+      // Final chorus
+      L(183,187,  "I am not afraid to keep on living",                                        "Ái am not afréid tu kip on líving", true),
+      L(187.5,192,"I am not afraid to walk this world alone",                                 "Ái am not afréid tu uók dis uórld alóun", true),
+      L(192.5,197,"Honey, if you stay, I'll be forgiven",                                     "Jáni, if yu stéi, Áil bi forguíven", true),
+      L(197.5,202,"Nothing you can say can stop me going home",                               "Názing yu kan séi kan stap mi góing jóum", true),
+      L(203,207,  "I am not afraid to keep on living",                                        "Ái am not afréid tu kip on líving", true),
+      L(207.5,212,"I am not afraid to walk this world alone",                                 "Ái am not afréid tu uók dis uórld alóun", true),
+      L(212.5,217,"Honey, if you stay, I'll be forgiven",                                     "Jáni, if yu stéi, Áil bi forguíven", true),
+      L(217.5,222,"Nothing you can say can stop me going home",                               "Názing yu kan séi kan stap mi góing jóum", true),
+    ],
+  },
 ];
