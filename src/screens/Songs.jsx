@@ -182,13 +182,13 @@ function Player({ songIndex, onBack }) {
         {/* Seek bar */}
         <div onClick={onSeekBar} style={{ height: 18, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
           <div style={{ flex: 1, height: 3, background: 'rgba(255,255,255,0.12)', borderRadius: 99, position: 'relative' }}>
-            <div style={{ height: '100%', borderRadius: 99, background: 'var(--accent)', width: pct, transition: 'width .15s linear' }}/>
+            <div style={{ height: '100%', borderRadius: 99, background: 'var(--teal)', width: pct, transition: 'width .15s linear' }}/>
             <div style={{ position: 'absolute', top: '50%', left: pct, transform: 'translate(-50%,-50%)', width: 11, height: 11, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.5)' }}/>
           </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3, fontSize: 10, fontWeight: 700, color: 'rgba(255,255,255,0.4)', fontFamily: "'JetBrains Mono', monospace" }}>
           <span>{fmt(currentTime)}</span>
-          <button onClick={togglePlay} style={{ border: 'none', background: 'none', color: isReady ? 'var(--accent)' : 'rgba(255,255,255,0.2)', cursor: isReady ? 'pointer' : 'default', padding: '0 8px', fontFamily: 'Nunito', fontWeight: 800, fontSize: 11 }}>
+          <button onClick={togglePlay} style={{ border: 'none', background: 'none', color: isReady ? 'var(--teal)' : 'rgba(255,255,255,0.2)', cursor: isReady ? 'pointer' : 'default', padding: '0 8px', fontFamily: 'Nunito', fontWeight: 800, fontSize: 11 }}>
             {!isReady ? '...' : isPlaying ? '⏸ Pausa' : '▶ Play'}
           </button>
           <span>{fmt(duration)}</span>
@@ -219,7 +219,7 @@ function Player({ songIndex, onBack }) {
                   padding: isActive && !isChorus ? '13px 22px 12px' : '5px 22px',
                   margin: '1px 0',
                   borderRadius: 14,
-                  background: isActive ? 'rgba(139,92,246,0.10)' : 'transparent',
+                  background: isActive ? 'var(--teal-soft)' : 'transparent',
                   textAlign: 'center',
                   cursor: 'pointer',
                   transition: 'background .25s ease, padding .25s cubic-bezier(0.23,1,0.32,1)',
@@ -264,7 +264,7 @@ function Player({ songIndex, onBack }) {
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
               Anterior
             </button>
-            <button onClick={nextLine} disabled={act === song.lyrics.length - 1} style={{ flex: 1, height: 46, borderRadius: 13, border: `1px solid ${act === song.lyrics.length - 1 ? 'rgba(255,255,255,0.05)' : 'rgba(139,92,246,0.5)'}`, background: act === song.lyrics.length - 1 ? 'transparent' : 'rgba(139,92,246,0.12)', color: act === song.lyrics.length - 1 ? '#1e2035' : 'var(--accent)', fontFamily: 'Nunito', fontWeight: 800, fontSize: 14, cursor: act === song.lyrics.length - 1 ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <button onClick={nextLine} disabled={act === song.lyrics.length - 1} style={{ flex: 1, height: 46, borderRadius: 13, border: `1px solid ${act === song.lyrics.length - 1 ? 'rgba(255,255,255,0.05)' : 'var(--teal)'}`, background: act === song.lyrics.length - 1 ? 'transparent' : 'var(--teal-soft)', color: act === song.lyrics.length - 1 ? '#1e2035' : 'var(--teal)', fontFamily: 'Nunito', fontWeight: 800, fontSize: 14, cursor: act === song.lyrics.length - 1 ? 'default' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
               Siguiente
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
@@ -304,7 +304,7 @@ function Player({ songIndex, onBack }) {
               <button onClick={() => { setShowFix(false); setUrlInput(''); setUrlError(''); }} style={{ flex: 1, padding: '11px', borderRadius: 12, background: 'transparent', border: '1px solid rgba(255,255,255,0.08)', color: '#4b5563', fontSize: '0.85rem', cursor: 'pointer', fontFamily: 'Nunito', fontWeight: 700 }}>
                 Cancelar
               </button>
-              <button onClick={applyNewUrl} style={{ flex: 2, padding: '11px', borderRadius: 12, background: 'rgba(139,92,246,0.18)', border: '1px solid rgba(139,92,246,0.5)', color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito' }}>
+              <button onClick={applyNewUrl} style={{ flex: 2, padding: '11px', borderRadius: 12, background: 'var(--teal-soft)', border: '1px solid var(--teal)', color: 'var(--teal)', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito' }}>
                 Actualizar video
               </button>
             </div>
