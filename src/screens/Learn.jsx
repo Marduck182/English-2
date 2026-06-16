@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useApp } from '../AppContext';
 import { vocab } from '../data/vocab';
+import { useLearnStore } from '../store/learnStore';
 
 const BATCH_SIZE   = 50;
 const totalBatches = Math.ceil(vocab.length / BATCH_SIZE);
@@ -31,6 +32,9 @@ function SegToggle({ options, value, onChange }) {
 }
 
 function BatchPickerModal({ current, onSelect, onClose }) {
+  const batchLearnedCount = useLearnStore(s => s.batchLearnedCount);
+  const totalLearned      = useLearnStore(s => s.totalLearned);
+
   return (
     <div
       onClick={onClose}
@@ -52,7 +56,7 @@ function BatchPickerModal({ current, onSelect, onClose }) {
         <div style={{ width: 40, height: 4, borderRadius: 99, background: 'var(--border2)', alignSelf: 'center', margin: '10px 0 18px' }}/>
 
         {/* Title row */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
           <div>
             <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.14em', color: 'var(--accent)', textTransform: 'uppercase' }}>Aprender</div>
             <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', lineHeight: 1.1 }}>Elige una colección</div>
@@ -60,32 +64,49 @@ function BatchPickerModal({ current, onSelect, onClose }) {
           <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: 99, border: 'none', background: 'var(--surface2)', color: 'var(--dim)', fontSize: 20, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>×</button>
         </div>
 
-        {/* Info */}
-        <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--faint)', marginBottom: 14 }}>
-          {vocab.length} palabras · {totalBatches} colecciones de {BATCH_SIZE}
+        {/* Global progress */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+          <div style={{ flex: 1, height: 6, background: 'var(--surface2)', borderRadius: 99, overflow: 'hidden' }}>
+            <div style={{ height: '100%', borderRadius: 99, background: 'var(--accent)', transition: 'width .4s', width: `${(totalLearned() / vocab.length * 100).toFixed(1)}%` }}/>
+          </div>
+          <div style={{ fontSize: 12, fontWeight: 800, color: 'var(--dim)', whiteSpace: 'nowrap' }}>
+            {totalLearned()} / {vocab.length} aprendidas
+          </div>
         </div>
 
         {/* Grid */}
         <div style={{ overflowY: 'auto', flex: 1, paddingRight: 2 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
             {Array.from({ length: totalBatches }, (_, i) => {
-              const active = i === current;
-              const start  = i * BATCH_SIZE + 1;
-              const end    = Math.min((i + 1) * BATCH_SIZE, vocab.length);
+              const active    = i === current;
+              const start     = i * BATCH_SIZE + 1;
+              const end       = Math.min((i + 1) * BATCH_SIZE, vocab.length);
+              const batchSize = end - start + 1;
+              const done      = batchLearnedCount(i);
+              const complete  = done === batchSize;
               return (
                 <button
                   key={i}
                   onClick={() => { onSelect(i); onClose(); }}
                   style={{
-                    height: 72, borderRadius: 16, border: active ? '2px solid var(--accent)' : '1.5px solid var(--border)',
-                    background: active ? 'var(--accent-soft)' : 'var(--surface)',
+                    height: 76, borderRadius: 16, padding: '8px 6px',
+                    border: active ? '2px solid var(--accent)' : complete ? '1.5px solid var(--teal)' : '1.5px solid var(--border)',
+                    background: active ? 'var(--accent-soft)' : complete ? 'var(--teal-soft)' : 'var(--surface)',
                     cursor: 'pointer', display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center', gap: 3,
+                    alignItems: 'center', justifyContent: 'center', gap: 4,
                     transition: 'all .15s',
                   }}
                 >
-                  <div style={{ fontSize: 20, fontWeight: 900, color: active ? 'var(--accent)' : 'var(--text)', lineHeight: 1 }}>{i + 1}</div>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: active ? 'var(--accent)' : 'var(--faint)', letterSpacing: '0.02em' }}>{start}–{end}</div>
+                  <div style={{ fontSize: 19, fontWeight: 900, color: active ? 'var(--accent)' : complete ? 'var(--teal)' : 'var(--text)', lineHeight: 1 }}>
+                    {complete ? '✓' : i + 1}
+                  </div>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: active ? 'var(--accent)' : complete ? 'var(--teal)' : 'var(--faint)' }}>
+                    {done}/{batchSize}
+                  </div>
+                  {/* Mini progress bar */}
+                  <div style={{ width: '80%', height: 3, background: 'var(--border)', borderRadius: 99, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', borderRadius: 99, background: active ? 'var(--accent)' : complete ? 'var(--teal)' : 'var(--dim)', width: `${(done / batchSize * 100)}%`, transition: 'width .3s' }}/>
+                  </div>
                 </button>
               );
             })}
@@ -183,6 +204,10 @@ function CardBack({ word, showPhonetic, onSpeakExample }) {
 
 export default function Learn() {
   const { showPhonetic, audioSpeed } = useApp();
+  const markLearned   = useLearnStore(s => s.markLearned);
+  const unmarkLearned = useLearnStore(s => s.unmarkLearned);
+  const isLearned     = useLearnStore(s => s.isLearned);
+
   const [batchIndex, setBatchIndex]   = useState(0);
   const [cardIndex, setCardIndex]     = useState(0);
   const [flipped, setFlipped]         = useState(false);
@@ -236,6 +261,8 @@ export default function Learn() {
   }
 
   function decide(dir) {
+    if (dir > 0) markLearned(word.id);
+    else unmarkLearned(word.id);
     setDragX(dir * 650); setDragY(-40);
     setTimeout(() => {
       setDragX(0); setDragY(0); setFlipped(false);
@@ -286,6 +313,9 @@ export default function Learn() {
         <div style={{ flex: 1, height: 8, background: 'var(--surface2)', borderRadius: 99, overflow: 'hidden' }}>
           <div style={{ height: '100%', borderRadius: 99, background: 'var(--accent)', transition: 'width .5s cubic-bezier(.2,.8,.2,1)', width: pct }}/>
         </div>
+        {isLearned(word.id) && (
+          <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--teal)', background: 'var(--teal-soft)', padding: '3px 9px', borderRadius: 99, whiteSpace: 'nowrap' }}>✓ aprendida</div>
+        )}
         <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--dim)', whiteSpace: 'nowrap' }}>{cardNum} / {total}</div>
       </div>
 

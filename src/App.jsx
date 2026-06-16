@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { AppProvider, useApp } from './AppContext';
-import StatusBar from './components/StatusBar';
 import TabBar from './components/TabBar';
 import Learn from './screens/Learn';
 import Speak from './screens/Speak';
@@ -43,7 +42,6 @@ function Shell() {
         borderRadius: 'clamp(0px, calc((100vw - 420px) * 999), 38px)',
         boxShadow: '0 40px 90px -20px rgba(0,0,0,0.7), 0 0 0 1px var(--border)',
       }}>
-        <StatusBar/>
         <div style={{ flex: '1 1 auto', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           {tab === 'learn'    && <Learn    key="learn"/>}
           {tab === 'speak'    && <Speak    key="speak"/>}
