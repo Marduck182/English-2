@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: 'Nunito', system-ui, sans-serif; background: #090a0e; }
+::-webkit-scrollbar { width: 0; height: 0; }
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.22); }
+  50%       { transform: scaleY(1); }
+}
+@keyframes ring {
+  0%   { transform: scale(0.7); opacity: 0.7; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+@keyframes pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.screen-in { animation: screenIn 0.4s cubic-bezier(.2,.8,.2,1) both; }
+.wave-bar  { animation: wave 0.7s ease-in-out infinite; }
+.ring-anim { animation: ring 1.6s ease-out infinite; }
+.spin-anim { animation: spin 0.8s linear infinite; }
+.pulse-dot { animation: pulseDot 1s ease-in-out infinite; }
+.pop-in    { animation: pop 0.4s cubic-bezier(.2,.8,.25,1.1) both; }
